@@ -1,0 +1,2 @@
+#solveWordle.py
+
