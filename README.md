@@ -12,26 +12,26 @@ In the project wordleBot, we create a Python package that can find an optimised 
 
 ### File Structure/Architecture:
 
-wordleBot
-├── LICENSE
-├── README.md
-├── Documents
-├── Examples
-├── wordleBot
-│   ├── __init__.py
-│   ├── data
-│   │	├── google words
-│   │	├── unigram_freq.csv
-│   │	├── possible_words.csv	
-│   │	├── frequency.csv
-│   │	├── tweets.csv
-│   ├── tests
-│   │	├── test_wordleSimulation.py
-│   │	├── test_getTweets.py
-│   │	├── test_solveWordle.py
-│   ├── wordleSimulation.py
-│   ├── solveWordle.py
-│   ├── dataSetup.py
-│   ├── getTweets.py
-└── setup.py
+wordleBot\
+├── LICENSE\
+├── README.md\
+├── Documents\
+├── Examples\
+├── wordleBot\
+│   ├── __init__.py\
+│   ├── data\
+│   │	├── google words\
+│   │	├── unigram_freq.csv\
+│   │	├── possible_words.csv\	
+│   │	├── frequency.csv\
+│   │	├── tweets.csv\
+│   ├── tests\
+│   │	├── test_wordleSimulation.py\
+│   │	├── test_getTweets.py\
+│   │	├── test_solveWordle.py\
+│   ├── wordleSimulation.py\
+│   ├── solveWordle.py\
+│   ├── dataSetup.py\
+│   ├── getTweets.py\
+└── setup.py\
 
