@@ -12,6 +12,7 @@ In the project wordleBot, we create a Python package that can find an optimised 
 
 ### File Structure/Architecture:
 
+```bash
 .
 ├── Documents
 ├── Examples
