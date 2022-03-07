@@ -10,7 +10,11 @@ That’s it!
 
 In the project wordleBot, we create a Python package that can find an optimised solution for the given Wordle (optimistically in the first attempt).
 
-### File Structure/Architecture:
+### Installing the Package:
+```bash
+python setup.py install
+```
+### Package Structure:
 
 ```bash
 .
@@ -35,4 +39,5 @@ In the project wordleBot, we create a Python package that can find an optimised 
     │   └── test_wordleSimulation.py
     ├── twitterKeys.py
     └── wordleSimulation.py
+ ```
 
