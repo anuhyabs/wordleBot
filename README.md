@@ -13,9 +13,11 @@ This is done by simulations of hypothetical games and comparing the feedback rec
 The inspiration for this project is this excellent [Ben Hammer’s Kaggle project](https://www.kaggle.com/benhamner/wordle-1-6).
 
 ### Installing the Package:
-```bash
-python setup.py install
-```
+
+1. Clone the repository: ```bash git clone https://github.com/anuhyabs/wordleBot.git```
+2. ```bash cd wordleBot```
+3. ```bash python setup.py install```
+
 ### Package Structure:
 
 ```bash
