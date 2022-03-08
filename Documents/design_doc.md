@@ -30,7 +30,26 @@ The dataSetup class is used to set up the data set of all possible answers and t
 
 
 #### GetTweets
+The getTweets is a custom class that is used to pull a sample of tweets (5000) of a given Wordle id, filters those tweets that are valid, and adds it to the tweets.csv dataset.
+| GetTweets              |
+|------------------------|
+| twitterAuth()          |
+| getWordleID()        |
+| is_valid_wordle_tweet(tweet, wordle_id) |
+| pullTweets(self,api,wordle_id) |
+
 #### WordleSimulation
+After the dataset was cleaned and ready to use, another custom class created - wordleSimulation, that is used to simulate the wordle game for all the possible answers - the words in the dataset that we created using the dataSetup class. 
+| WordleSimulation              |
+|------------------------|
+| __init__(self) |
+| evaluate_guess_char(answer, guess, pos) |
+| evaluate_guess(self,answer, guess) |
+| simulate_wordle(self,answer,starting_weights) |
+| run_simulations(self,word, num_sims) |
+| getSimRes(self,sim_results) |
+| main(self) |
+
 #### SolveWordle
 
 
