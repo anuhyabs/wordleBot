@@ -12,7 +12,7 @@ That’s it!
 ### Goal
 In the project wordleBot, we create a Python package that can find an optimised solution for the given Wordle (optimistically in the first attempt) using the ⬛🟨🟩 tweet distribution.
 This is done by precomputing simulations of hypothetical games and comparing the feedback received with data from Twitter by ranking a word based on cosine similarity. 
-The inspiration for this project is this excellent Ben Hammer’s Kaggle project.
+The inspiration for this project is this excellent [Ben Hammer’s Kaggle project](https://www.kaggle.com/benhamner/wordle-1-6).
 
 ## Design Overview
 
@@ -21,6 +21,14 @@ The project consists of four main components : DataSetup, GetTweets, WordleSimul
 ### Design details
 
 #### DataSetup
+The dataSetup class is used to set up the data set of all possible answers and their frequency. In this class there are three functions. 
+| DataSetup              |
+|------------------------|
+| getData()              |
+| cleanData(data)        |
+| addWordleAns(new_data) |
+
+
 #### GetTweets
 #### WordleSimulation
 #### SolveWordle
