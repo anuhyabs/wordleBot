@@ -29,7 +29,7 @@ The DataSetup class is a stand alone class that is used to set up the data set o
 | \_cleanData(data)        |
 | \_addWordleAns(new_data) |
 
-*Input:* Unigram Frequency dataset <br>
+*Input:*  Unigram Frequency dataset <br>
 *Output:* possible_words.csv
 
 #### GetTweets
@@ -60,12 +60,12 @@ The WordleSimulation class is used to run simulations of the wordle game for all
 | \_invalidRes(self) |
 | wordleSim(self) |
 
-*Input:* possible_words.csv <br>
-*Output:* vec_all.pickle <br>
+*Input:*   possible_words.csv <br>
+*Output:*  vec_all.pickle <br>
           &emsp; &emsp; &emsp; vec_first.pickle <br>
-          vec_penultimate.pickle <br>
-          vec_ratio.pickle <br>
-          invalid_results.pickle <br>
+          &emsp; &emsp; &emsp; vec_penultimate.pickle <br>
+          &emsp; &emsp; &emsp; vec_ratio.pickle <br>
+          &emsp; &emsp; &emsp; invalid_results.pickle <br>
 
 #### SolveWordle
 The SolveWordle class is used to compute the distribution of Wordle results twitter for a particular id, compare this to the distributions we found from the wordleSimulations class, rank the possible words based on the comparison of the distribution. The word the ranks the highest is our guess for solving the Wordle in the first try!
@@ -77,11 +77,11 @@ The SolveWordle class is used to compute the distribution of Wordle results twit
 | wordleGuess(Tweet) |
 | computeRank(self) |
 
-*Input:* possible_words.csv <br>
-         tweets.csv <br>
-         vec_all.pickle <br>
-         vec_ratio.pickle <br>
-         invalid_results.pickle <br>
+*Input:*   possible_words.csv <br>
+         &emsp; &emsp; &emsp; tweets.csv <br>
+         &emsp; &emsp; &emsp; vec_all.pickle <br>
+         &emsp; &emsp; &emsp; vec_ratio.pickle <br>
+         &emsp; &emsp; &emsp; invalid_results.pickle <br>
 
 
 
