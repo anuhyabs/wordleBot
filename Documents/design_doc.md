@@ -62,7 +62,7 @@ The WordleSimulation class is used to run simulations of the wordle game for all
 
 *Input:* possible_words.csv <br>
 *Output:* vec_all.pickle <br>
-          \t vec_first.pickle <br>
+          &emsp; vec_first.pickle <br>
           vec_penultimate.pickle <br>
           vec_ratio.pickle <br>
           invalid_results.pickle <br>
