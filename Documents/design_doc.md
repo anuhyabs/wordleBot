@@ -29,8 +29,8 @@ The DataSetup class is a stand alone class that is used to set up the data set o
 | \_cleanData(data)        |
 | \_addWordleAns(new_data) |
 
-*Input:*  Unigram Frequency dataset <br>
-*Output:* possible_words.csv
+*Input:* &ensp; Unigram Frequency dataset <br>
+*Output:* &nbsp; possible_words.csv
 
 #### GetTweets
 The GetTweets is a custom class that is used to pull a sample of tweets (5000) of a given Wordle id, filters those tweets that are valid, and creates a tweets.csv dataset.
@@ -60,8 +60,8 @@ The WordleSimulation class is used to run simulations of the wordle game for all
 | \_invalidRes(self) |
 | wordleSim(self) |
 
-*Input:*   possible_words.csv <br>
-*Output:*  vec_all.pickle <br>
+*Input:*  &ensp; possible_words.csv <br>
+*Output:* &nbsp; vec_all.pickle <br>
           &emsp; &emsp; &emsp; vec_first.pickle <br>
           &emsp; &emsp; &emsp; vec_penultimate.pickle <br>
           &emsp; &emsp; &emsp; vec_ratio.pickle <br>
@@ -77,7 +77,7 @@ The SolveWordle class is used to compute the distribution of Wordle results twit
 | wordleGuess(Tweet) |
 | computeRank(self) |
 
-*Input:*   possible_words.csv <br>
+*Input:* &ensp; possible_words.csv <br>
          &emsp; &emsp; &emsp; tweets.csv <br>
          &emsp; &emsp; &emsp; vec_all.pickle <br>
          &emsp; &emsp; &emsp; vec_ratio.pickle <br>
