@@ -15,7 +15,7 @@ from twitterKeys import twitterKeys
 
 class GetTweets:
     
-    def twitterAuth():
+    def _twitterAuth(self):
         '''
         This function provides keys for Twitter API authentication.
 
@@ -27,7 +27,7 @@ class GetTweets:
         api = tweepy.API(auth)
         return(api)
 
-    def getWordleID():
+    def _getWordleID(self):
         '''
         This function gets the Wordle-ID for the day.
 
@@ -40,7 +40,7 @@ class GetTweets:
         return(wordle_id)
     
 
-    def is_valid_wordle_tweet(tweet, wordle_id): 
+    def _is_valid_wordle_tweet(self,tweet, wordle_id): 
         '''
         This function checks matches wordle ID for the given day and ensures that the tweet text  is clean.
 
@@ -73,7 +73,7 @@ class GetTweets:
             return False
         return True
 
-    def pullTweets(self,api,wordle_id):
+    def _pullTweets(self,api,wordle_id):
         '''
         This function pulls 5000 tweets from twitter for the given Wordle ID.
 
@@ -86,14 +86,17 @@ class GetTweets:
         
         print("Pulled %d tweets for wordle %d" % (len(wordle_tweets), wordle_id))
     
-        tweets_df = pd.DataFrame([tweet for tweet in wordle_tweets if self.is_valid_wordle_tweet(tweet[1], tweet[0])],
+        tweets_df = pd.DataFrame([tweet for tweet in wordle_tweets if self._is_valid_wordle_tweet(tweet[1], tweet[0])],
                                      columns=["wordle_id", "tweet_text"])
         tweets_df.to_csv("./data/tweets.csv")
         
-    if __name__ == "__main__":
-        api = twitterAuth()
-        wordle_id = getWordleID()
-        pullTweets(api, wordle_id)
-        
+def main():
+    getTweets = GetTweets()
+    api = getTweets. _twitterAuth()
+    wordle_id = getTweets._getWordleID()
+    getTweets._pullTweets(api, wordle_id)
+
+if __name__ == "__main__":
+    main()
         
 

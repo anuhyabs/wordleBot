@@ -9,7 +9,7 @@ import pandas as pd
   
 class DataSetup:
     
-    def getData():
+    def _getData(self):
         '''
         This function extracts data from the Unigram frequency file and stores it in a dataframe
 
@@ -22,7 +22,7 @@ class DataSetup:
         #df = pd.read_csv('./1gramsbyfreq.txt',delimiter=('\t'),header = 0)
         return (df)
     
-    def cleanData(data):
+    def _cleanData(self,data):
         '''
         This function filters all 5 letter words from the words list.
 
@@ -44,7 +44,7 @@ class DataSetup:
         new_data = new_data.reset_index(drop=True)
         return (new_data)
     
-    def addWordleAns(new_data):
+    def _addWordleAns(self,new_data):
         '''
         This function adds the pre-defined Wordle answers to the words list 
         and assigns minimum frequency to the words that do not exist in the original words list.
@@ -68,12 +68,16 @@ class DataSetup:
         return english_freqs
         
     
-    if __name__ == "__main__":
-        data = getData()
-        cleaned_data = cleanData(data)
-        complete_data = addWordleAns(cleaned_data)
-        data_items = complete_data.items()
-        data_list = list(data_items)
-        possible_words = pd.DataFrame(data_list)
-        possible_words.to_csv('./data/possible_words.csv',index=False)
-
+def main():
+    dataSetup = DataSetup()
+    data = dataSetup._getData()
+    cleaned_data = dataSetup._cleanData(data)
+    complete_data = dataSetup._addWordleAns(cleaned_data)
+    data_items = complete_data.items()
+    data_list = list(data_items)
+    possible_words = pd.DataFrame(data_list)
+    possible_words.to_csv('./data/possible_words.csv',index=False)
+        
+    
+if __name__ == "__main__":
+     main()
