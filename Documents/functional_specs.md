@@ -14,12 +14,12 @@ That’s it!
 - Developers
 
 ### Data sources
-- https://www.kaggle.com/rtatman/english-word-frequency 	
+- https://www.kaggle.com/rtatman/english-word-frequency\	
 This dataset contains the counts of the 333,333 most commonly-used single words on the English language web, as derived from the Google Web Trillion Word Corpus.
 - Twitter data collected using the Twitter API for a specific Wordle ID.
 
 ### Use cases
-1. Word Game enthusiasts setup the package and run the program to solve the wordle in one guess.\
+1. Word Game enthusiasts setup the package and run the program to solve the wordle in one guess.
 2. Developers who want to build a Wordle Solver using the distribution of tweets for the Wordle ID.
 
 
