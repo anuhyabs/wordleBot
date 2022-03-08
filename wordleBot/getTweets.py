@@ -90,13 +90,10 @@ class GetTweets:
                                      columns=["wordle_id", "tweet_text"])
         tweets_df.to_csv("./data/tweets.csv")
         
-def main():
-    getTweets = GetTweets()
-    api = getTweets. _twitterAuth()
-    wordle_id = getTweets._getWordleID()
-    getTweets._pullTweets(api, wordle_id)
+    def getTweets(self):
+    	api = self. _twitterAuth()
+    	wordle_id = self._getWordleID()
+    	self._pullTweets(api, wordle_id)
 
-if __name__ == "__main__":
-    main()
-        
+
 
