@@ -1,4 +1,4 @@
-#wordleSimulation.py
+#WordleSimulation.py
 """
 Created on Sat Mar  5 17:43:06 2022
 Name: Wordle Simulation
@@ -12,7 +12,7 @@ import gc
 import Counter
 from itertools import product
 
-class wordleSimulation:
+class WordleSimulation:
     
     def __init__(self):
         self.words = pd.read_csv('./data/possible_words.csv',header = 0)

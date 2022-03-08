@@ -1,4 +1,4 @@
-#dataSetup.py
+#DataSetup.py
 """
 Created on Tue Mar  1 17:54:55 2022
 Name: Datasets
@@ -7,7 +7,7 @@ Description: Setting up dataset of all possible answers and their frequency
 """
 import pandas as pd
   
-class dataSetup:
+class DataSetup:
     
     def getData():
         '''

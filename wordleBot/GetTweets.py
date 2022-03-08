@@ -1,4 +1,4 @@
-#getTweets.py
+#GetTweets.py
 
 """
 Created on Sat Mar  5 13:43:59 2022
@@ -13,7 +13,7 @@ import re
 
 from twitterKeys import twitterKeys
 
-class getTweets:
+class GetTweets:
     
     def twitterAuth():
         '''
