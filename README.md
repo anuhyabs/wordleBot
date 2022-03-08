@@ -14,9 +14,9 @@ The inspiration for this project is this excellent [Ben Hammer’s Kaggle projec
 
 ### Installing the Package:
 
-1. Clone the repository: ```bash git clone https://github.com/anuhyabs/wordleBot.git```
-2. ```bash cd wordleBot```
-3. ```bash python setup.py install```
+1. Clone the repository: ```git clone https://github.com/anuhyabs/wordleBot.git```
+2. ```cd wordleBot```
+3. ```python setup.py install```
 
 ### Package Structure:
 
