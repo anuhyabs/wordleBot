@@ -14,7 +14,7 @@ That’s it!
 - Developers
 
 ### Data sources
-- https://www.kaggle.com/rtatman/english-word-frequency /n	
+- https://www.kaggle.com/rtatman/english-word-frequency <br>	
 This dataset contains the counts of the 333,333 most commonly-used single words on the English language web, as derived from the Google Web Trillion Word Corpus.
 - Twitter data collected using the Twitter API for a specific Wordle ID.
 
