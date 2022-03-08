@@ -21,36 +21,67 @@ The project consists of four main components : DataSetup, GetTweets, WordleSimul
 ### Design details
 
 #### DataSetup
-The dataSetup class is used to set up the data set of all possible answers and their frequency. In this class there are three functions. 
+The DataSetup class is a stand alone class that is used to set up the data set of all possible answers and their frequency. In this class there are three functions. 
+
 | DataSetup              |
 |------------------------|
-| getData()              |
-| cleanData(data)        |
-| addWordleAns(new_data) |
+| \_getData()              |
+| \_cleanData(data)        |
+| \_addWordleAns(new_data) |
 
+*Input:* Unigram Frequency dataset <br>
+*Output:* possible_words.csv
 
 #### GetTweets
-The getTweets is a custom class that is used to pull a sample of tweets (5000) of a given Wordle id, filters those tweets that are valid, and adds it to the tweets.csv dataset.
+The GetTweets is a custom class that is used to pull a sample of tweets (5000) of a given Wordle id, filters those tweets that are valid, and creates a tweets.csv dataset.
+
 | GetTweets              |
 |------------------------|
-| twitterAuth()          |
-| getWordleID()        |
-| is_valid_wordle_tweet(tweet, wordle_id) |
-| pullTweets(self,api,wordle_id) |
+| \_twitterAuth()          |
+| \_getWordleID()        |
+| \_is_valid_wordle_tweet(tweet, wordle_id) |
+| \_pullTweets(self,api,wordle_id) |
+| getTweets(self) |
+
+*Output:* tweets.csv
 
 #### WordleSimulation
-After the dataset was cleaned and ready to use, another custom class created - wordleSimulation, that is used to simulate the wordle game for all the possible answers - the words in the dataset that we created using the dataSetup class. 
+The WordleSimulation class is used to run simulations of the wordle game for all the possible answers (obtained as the output of DataSetup.py). The frequency distributions for each word are then stored in pickle files and used as inputs to SolveWordle class. This class also acts as a standalone class.
+
 | WordleSimulation              |
 |------------------------|
 | __init__(self) |
-| evaluate_guess_char(answer, guess, pos) |
-| evaluate_guess(self,answer, guess) |
-| simulate_wordle(self,answer,starting_weights) |
-| run_simulations(self,word, num_sims) |
-| getSimRes(self,sim_results) |
-| main(self) |
+| \_evaluate_guess_char(answer, guess, pos) |
+| \_evaluate_guess(self,answer, guess) |
+| \_simulate_wordle(self,answer,starting_weights) |
+| \_run_simulations(self,word, num_sims) |
+| \_getSimRes(self,sim_results) |
+| \_exportFiles(self,sim_vec_all,sim_vec_first,sim_vec_penultimate,sim_vec_ratio) |
+| \_invalidRes(self) |
+| wordleSim(self) |
+
+*Input:* possible_words.csv <br>
+*Output:* vec_all.pickle <br>
+          vec_first.pickle <br>
+          vec_penultimate.pickle <br>
+          vec_ratio.pickle <br>
+          invalid_results.pickle <br>
 
 #### SolveWordle
+The SolveWordle class is used to compute the distribution of Wordle results twitter for a particular id, compare this to the distributions we found from the wordleSimulations class, rank the possible words based on the comparison of the distribution. The word the ranks the highest is our guess for solving the Wordle in the first try!
+
+| SolveWoredle              |
+|------------------------|
+| __init__(self) |
+| importData(self) |
+| wordleGuess(Tweet) |
+| computeRank(self) |
+
+*Input:* possible_words.csv <br>
+         tweets.csv <br>
+         vec_all.pickle <br>
+         vec_ratio.pickle <br>
+         invalid_results.pickle <br>
 
 
 
