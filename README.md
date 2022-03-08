@@ -34,16 +34,13 @@ python setup.py install
     ├── SolveWordle.py
     ├── WordleSimulation.py
     ├── __init__.py
-    ├── __pycache__
-    │   └── twitterKeys.cpython-38.pyc
     ├── data
     │   ├── possible_words.csv
     │   ├── tweets.csv
     │   └── unigram_freq.csv
-    ├── tests
-    │   ├── test_getTweets.py
-    │   ├── test_solveWordle.py
-    │   └── test_wordleSimulation.py
-    └── twitterKeys.py
+    └── tests
+        ├── test_getTweets.py
+        ├── test_solveWordle.py
+        └── test_wordleSimulation.py
  ```
 
