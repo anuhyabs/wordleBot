@@ -190,23 +190,23 @@ class WordleSimulation:
         with open("./data/invalid_results.pickle", "wb") as f:
             pickle.dump(invalid_results, f, protocol=pickle.HIGHEST_PROTOCOL)
             
-    def wordleSim(self):
-        ray.init()
-        res = []
-        num_sims = 10   
-        for i in range(len(self.words)):
-            res.append(self._run_simulations.remote(self.words.iloc[i,0], num_sims))
-        
-        sim_results = ray.get(res)
-        self._getSimRes(sim_results)        
-        ray.shutdown()
-        gc.collect()
-        
-        self._invalidRes()
-            
-            
-        
-        
-        
-                
+def main():
+    '''
+    The main functions creates an object of WordleSimulation and calls the functions in it since WordleSimulation is a standalone code
+    that can be run once and does not need to be executed again. 
+    '''
+    ray.init()
+    res = []
+    num_sims = 10
+    for i in range(len(main.words)):
+        res.append(main._run_simulations.remote(main.words.iloc[i,0], num_sims))
+    
+    sim_results = ray.get(res)
+    main._getSimRes(sim_results)
+    ray.shutdown()
+    gc.collect()
+    
+    main._invalidRes()
 
+if __name__ = "__main__":
+    main() 

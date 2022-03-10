@@ -15,6 +15,9 @@ import re
 class SolveWordle:
     
     def __init__(self):
+	'''
+	Contructor that declares all the class variables of solveWordle.
+	'''
         self.v_all = None
         self.v_ratio = None
         self.invalid_results = None
@@ -24,7 +27,9 @@ class SolveWordle:
         self.vec_locs = sorted(["".join(x) for x in product("YMN", repeat=5)])
         
     def importData(self):
-    
+    	'''
+	Import data from files  that were the outputs for WordleSimulation, getTweets and dataSetUp.
+	'''
         with open("./data/vec_all.pickle", "rb") as f:
             self.v_all = pickle.load(f)
     
@@ -41,7 +46,11 @@ class SolveWordle:
         self.words_ind = self.words.iloc[:,0]
     
     def wordle_guesses(tweet):
-        text = (tweet.replace("Y", "y").replace("🟩", "Y")
+        '''
+	Replace the green/yellow/black/grey tiles in the guesses with 'Y','M','N'.
+	Input: String that contains the tweet data from all the tweets collected.
+	'''
+	text = (tweet.replace("Y", "y").replace("🟩", "Y")
                      .replace("M", "m").replace("🟨", "M")
                      .replace("N", "n").replace("⬛", "N").replace("⬜", "N"))
         guesses = re.findall("([YMN]+)", text)
@@ -49,6 +58,10 @@ class SolveWordle:
 
 
     def computeRank(self):
+	'''
+	Computes the rank of the words based on the distribution obtained from tweets and pre computed simulations.
+	Prints the output of the game.
+	'''
         results = []
     
         for i in sorted(set(self.tweet_data["wordle_id"])):
