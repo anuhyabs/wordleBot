@@ -16,6 +16,9 @@ import pickle
 class WordleSimulation:
     
     def __init__(self):
+    	'''
+        Constructor to initialize variables for the class.
+        '''
         self.words = pd.read_csv('./data/possible_words.csv',header = 0)
         self.vec_locs = sorted(["".join(x) for x in product("YMN", repeat=5)])
         self.words_array = np.zeros((5, len(self.words)))
@@ -25,7 +28,23 @@ class WordleSimulation:
                 self.words_array[loc, i] = ord(self.words_ind[i][loc])
         
     def _evaluate_guess_char(answer, guess, pos):
-        if answer[pos]==guess[pos]:
+        '''
+        Compares the character in guess with characters in answer.
+
+        Parameters
+        ----------
+        answer : String
+            The final value of the game.
+        guess : String
+            Each guess made to reach the answer.
+        pos : Number
+            Position of character to compare.
+
+        Returns
+        -------
+        'Y','M' or 'N' - indication about the characters in guess word.
+        '''
+	if answer[pos]==guess[pos]:
             return "Y"
         unmatched_answer_chars = 0
         unmatched_guess_chars = 0
@@ -44,10 +63,39 @@ class WordleSimulation:
         return "N"
 
     def _evaluate_guess(self,answer, guess):
-        return "".join(self._evaluate_guess_char(answer, guess, i) for i in range(5)) 
+        '''
+        Calls the _evaluate_guess_char for each character in the guess word        
+        Parameters
+        ----------
+        answer : String
+            The final value of the game.
+        guess : String
+            Each guess made to reach the answer.
+
+        Returns
+        -------
+        Concatenation of 'Y','M','N' for each guess.
+        '''
+	return "".join(self._evaluate_guess_char(answer, guess, i) for i in range(5)) 
 
     def _simulate_wordle(self,answer,starting_weights):
-        weights = self.words.copy()
+       '''
+        Randomly selects a word for the first guess and passes the guess word to _evaluate_guess.
+        Updates the weights of the words based on the distribution that is returned from _evaluate_guess.
+
+        Parameters
+        ----------
+        answer : String
+            The final value of the game.
+        starting_weights : String
+            Each guess made to reach the answer.
+
+        Returns
+        -------
+        game : array
+            Returns all possible distributions for a word.
+        '''
+	weights = self.words.copy()
         game = []
         for i in range(6):
             cum_weights = np.cumsum(weights)
@@ -70,13 +118,33 @@ class WordleSimulation:
 
     @ray.remote
     def _run_simulations(self,word, num_sims):
-        games = [self.simulate_wordle(word) for i in range(num_sims)]
+         '''
+        Runns the simulation for a word num_sims times by calling the _simulate_wordle method.
+
+        Parameters
+        ----------
+        word : String
+            A word from the all possible words list.
+        num_sims : Number
+            The number of times the simulation must be run.
+
+        Returns
+        -------
+        word : String
+        all_counts : array.
+        first_counts : array
+        penultimate_counts : array
+        '''
+	games = [self.simulate_wordle(word) for i in range(num_sims)]
         all_counts = Counter(res for game in games for res in game if len(game)>=2 and game[-1]=="YYYYY")
         first_counts = Counter(game[0] for game in games if len(game)>=2 and game[-1]=="YYYYY")
         penultimate_counts = Counter(game[-2] for game in games if len(game)>=2 and game[-1]=="YYYYY")
         return (word, all_counts, first_counts, penultimate_counts)
 
     def _getSimRes(self,sim_results):
+	'''
+	Creates dictionaries to store the values of the distributions.
+	'''
         sim_vec_all = {}
         sim_vec_ratio = {}
         sim_vec_first = {}
@@ -93,7 +161,10 @@ class WordleSimulation:
         gc.collect()
         
     def _exportFiles(self,sim_vec_all,sim_vec_first,sim_vec_penultimate,sim_vec_ratio):
-        with open("./data/vec_all.pickle", "wb") as f:
+        '''
+	Export files in pickle format
+	'''
+	with open("./data/vec_all.pickle", "wb") as f:
             pickle.dump(sim_vec_all, f, protocol=pickle.HIGHEST_PROTOCOL)
         
         with open("./data/vec_first.pickle", "wb") as f:
@@ -106,6 +177,9 @@ class WordleSimulation:
             pickle.dump(sim_vec_ratio, f, protocol=pickle.HIGHEST_PROTOCOL)
             
     def _invalidRes(self):
+	'''
+	Remove all invalid vectors in the 'YMN' vectors
+	'''
         invalid_results = {}
         for a in self.words:
             invalid_results[a] = set("".join(x) for x in product("YMN", repeat=5))
