@@ -21,29 +21,27 @@ The inspiration for this project is this excellent [Ben Hammer’s Kaggle projec
 ### Package Structure:
 
 ```bash
-.
-├── Documents
-│   ├── FinalPresentation.pdf
-│   ├── design_doc.md
-│   └── functional_specs.md
-├── Examples
-│   └── example.py
-├── LICENSE
-├── README.md
-├── setup.py
-└── wordleBot
-    ├── DataSetup.py
-    ├── GetTweets.py
-    ├── SolveWordle.py
-    ├── WordleSimulation.py
-    ├── __init__.py
-    ├── data
-    │   ├── possible_words.csv
-    │   ├── tweets.csv
-    │   └── unigram_freq.csv
-    └── tests
-        ├── test_getTweets.py
-        ├── test_solveWordle.py
-        └── test_wordleSimulation.py
+wordleBot
+    ├── Documents
+    │   ├── FinalPresentation.pdf
+    │   ├── design_doc.md
+    │   └── functional_specs.md
+    ├── Examples
+    │   └── example.py
+    ├── LICENSE
+    ├── README.md
+    ├── setup.py
+    └── wordleBot
+        ├── __init__.py
+        ├── data
+        │   ├── possible_words.csv
+        │   ├── tweets.csv
+        │   └── unigram_freq.csv
+        ├── dataSetup.py
+        ├── getTweets.py
+        ├── solveWordle.py
+        ├── tests
+        │   ├── test_solveWordle.py
+        │   └── test_wordleSimulation.py
+        └── wordleSimulation.py
  ```
-
