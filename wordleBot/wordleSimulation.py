@@ -1,4 +1,4 @@
-#wordleSimulation.py
+# wordleSimulation.py
 """
 Created on Sat Mar  5 17:43:06 2022
 Name: Wordle Simulation
@@ -14,7 +14,7 @@ from itertools import product
 import pickle
 
 class WordleSimulation:
-    
+
     def __init__(self):
     	'''
         Constructor to initialize variables for the class.
@@ -26,7 +26,7 @@ class WordleSimulation:
         for i in range(len(self.words_ind)):
             for loc in range(5):
                 self.words_array[loc, i] = ord(self.words_ind[i][loc])
-        
+
     def _evaluate_guess_char(answer, guess, pos):
         '''
         Compares the character in guess with characters in answer.
@@ -48,7 +48,7 @@ class WordleSimulation:
             return "Y"
         unmatched_answer_chars = 0
         unmatched_guess_chars = 0
-        this_guess_num = 0 
+        this_guess_num = 0
         for i in range(5):
             if answer[i]==guess[pos]:
                 if answer[i]!=guess[i]:
@@ -64,7 +64,7 @@ class WordleSimulation:
 
     def _evaluate_guess(self,answer, guess):
         '''
-        Calls the _evaluate_guess_char for each character in the guess word        
+        Calls the _evaluate_guess_char for each character in the guess word
         Parameters
         ----------
         answer : String
@@ -149,7 +149,7 @@ class WordleSimulation:
         sim_vec_ratio = {}
         sim_vec_first = {}
         sim_vec_penultimate = {}
-        
+
         for (word, all_counts, first_counts, penultimate_counts) in sim_results:
             sim_vec_all[word] = [all_counts[res] for res in self.vec_locs]
             sim_vec_first[word] = [first_counts[res] for res in self.vec_locs]
@@ -159,23 +159,23 @@ class WordleSimulation:
         self._exportFiles(sim_vec_all,sim_vec_first,sim_vec_penultimate,sim_vec_ratio)
         del sim_results
         gc.collect()
-        
+
     def _exportFiles(self,sim_vec_all,sim_vec_first,sim_vec_penultimate,sim_vec_ratio):
         '''
 	Export files in pickle format
 	'''
 	with open("./data/vec_all.pickle", "wb") as f:
             pickle.dump(sim_vec_all, f, protocol=pickle.HIGHEST_PROTOCOL)
-        
+
         with open("./data/vec_first.pickle", "wb") as f:
             pickle.dump(sim_vec_first, f, protocol=pickle.HIGHEST_PROTOCOL)
-        
+
         with open("./data/vec_penultimate.pickle", "wb") as f:
             pickle.dump(sim_vec_penultimate, f, protocol=pickle.HIGHEST_PROTOCOL)
-            
+
         with open("./data/vec_ratio.pickle", "wb") as f:
             pickle.dump(sim_vec_ratio, f, protocol=pickle.HIGHEST_PROTOCOL)
-            
+
     def _invalidRes(self):
 	'''
 	Remove all invalid vectors in the 'YMN' vectors
@@ -189,7 +189,7 @@ class WordleSimulation:
                     invalid_results[a].remove(r)
         with open("./data/invalid_results.pickle", "wb") as f:
             pickle.dump(invalid_results, f, protocol=pickle.HIGHEST_PROTOCOL)
-            
+
 def main():
     '''
     The main functions creates an object of WordleSimulation and calls the functions in it since WordleSimulation is a standalone code
@@ -200,13 +200,13 @@ def main():
     num_sims = 10
     for i in range(len(main.words)):
         res.append(main._run_simulations.remote(main.words.iloc[i,0], num_sims))
-    
+
     sim_results = ray.get(res)
     main._getSimRes(sim_results)
     ray.shutdown()
     gc.collect()
-    
+
     main._invalidRes()
 
 if __name__ = "__main__":
-    main() 
+    main()

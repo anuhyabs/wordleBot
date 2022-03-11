@@ -1,2 +1,2 @@
-#wordleBot/__init__.py
+# wordleBot/__init__.py
 
