@@ -9,14 +9,14 @@ import numpy as np
 import pandas as pd
 import ray
 import gc
-import Counter
+from collections import Counter
 from itertools import product
 import pickle
 
 class WordleSimulation:
-
+    
     def __init__(self):
-    	'''
+        '''
         Constructor to initialize variables for the class.
         '''
         self.words = pd.read_csv('./data/possible_words.csv',header = 0)
@@ -26,6 +26,7 @@ class WordleSimulation:
         for i in range(len(self.words_ind)):
             for loc in range(5):
                 self.words_array[loc, i] = ord(self.words_ind[i][loc])
+        self.starting_weights = self.words.iloc[:,1]
 
     def _evaluate_guess_char(answer, guess, pos):
         '''
@@ -38,13 +39,13 @@ class WordleSimulation:
         guess : String
             Each guess made to reach the answer.
         pos : Number
-            Position of character to compare.
+         Position of character to compare.
 
         Returns
         -------
         'Y','M' or 'N' - indication about the characters in guess word.
         '''
-	if answer[pos]==guess[pos]:
+        if answer[pos]==guess[pos]:
             return "Y"
         unmatched_answer_chars = 0
         unmatched_guess_chars = 0
@@ -76,12 +77,14 @@ class WordleSimulation:
         -------
         Concatenation of 'Y','M','N' for each guess.
         '''
-	return "".join(self._evaluate_guess_char(answer, guess, i) for i in range(5)) 
-
-    def _simulate_wordle(self,answer,starting_weights):
-       '''
-        Randomly selects a word for the first guess and passes the guess word to _evaluate_guess.
-        Updates the weights of the words based on the distribution that is returned from _evaluate_guess.
+        return "".join(self._evaluate_guess_char(answer, guess, i) for i in range(5))
+    
+    def _simulate_wordle(self,answer):
+        '''
+        Randomly selects a word for the first guess and passes the guess word 
+        to _evaluate_guess.
+        Updates the weights of the words based on the distribution that is 
+        returned from _evaluate_guess.
 
         Parameters
         ----------
@@ -95,11 +98,12 @@ class WordleSimulation:
         game : array
             Returns all possible distributions for a word.
         '''
-	weights = self.words.copy()
+        weights = self.starting_weights.copy()
         game = []
         for i in range(6):
             cum_weights = np.cumsum(weights)
-            guess = self.words[np.nonzero(np.random.randint(cum_weights[-1])<cum_weights)[0][0]]
+            guess = self.words[np.nonzero(np.random.randint(
+                cum_weights[-1])<cum_weights)[0][0]]
             res = self._evaluate_guess(answer, guess)
             game.append(res)
             if res=="YYYYY":
@@ -109,17 +113,19 @@ class WordleSimulation:
                     weights *= (self.words_array[loc,:]==ord(guess[loc]))
                 if res[loc]=="M":
                     locs = [j for j in range(5) if j!=loc]
-                    weights *= np.sum(self.words_array[locs,:]==ord(guess[loc]), axis=0)
-                if (res[loc]=="N") and (guess[loc] not in [guess[i] for i in range(5) if res[i]=="M"]):
+                    weights *= np.sum(self.words_array[locs,:]==ord(guess[loc]),
+                                      axis=0)
+                if (res[loc]=="N") and (guess[loc] not in [
+                        guess[i] for i in range(5) if res[i]=="M"]):
                     for loc2 in range(5):
                         if res[loc2]!="Y":
                             weights *= (self.words_array[loc2,:]!=ord(guess[loc]))
         return game
-
+    
     @ray.remote
-    def _run_simulations(self,word, num_sims):
-         '''
-        Runns the simulation for a word num_sims times by calling the _simulate_wordle method.
+    def run_simulations(self,word):
+        '''
+        Runs the simulation for a word num_sims times by calling the _simulate_wordle method.
 
         Parameters
         ----------
@@ -135,16 +141,17 @@ class WordleSimulation:
         first_counts : array
         penultimate_counts : array
         '''
-	games = [self.simulate_wordle(word) for i in range(num_sims)]
+        num_sims = 10
+        games = [self._simulate_wordle(word) for i in range(num_sims)]
         all_counts = Counter(res for game in games for res in game if len(game)>=2 and game[-1]=="YYYYY")
         first_counts = Counter(game[0] for game in games if len(game)>=2 and game[-1]=="YYYYY")
         penultimate_counts = Counter(game[-2] for game in games if len(game)>=2 and game[-1]=="YYYYY")
         return (word, all_counts, first_counts, penultimate_counts)
 
-    def _getSimRes(self,sim_results):
-	'''
-	Creates dictionaries to store the values of the distributions.
-	'''
+    def getSimRes(self, sim_results):
+        '''
+        Creates dictionaries to store the values of the distributions.
+        '''
         sim_vec_all = {}
         sim_vec_ratio = {}
         sim_vec_first = {}
@@ -160,11 +167,12 @@ class WordleSimulation:
         del sim_results
         gc.collect()
 
-    def _exportFiles(self,sim_vec_all,sim_vec_first,sim_vec_penultimate,sim_vec_ratio):
+    def _exportFiles(self, sim_vec_all, sim_vec_first, sim_vec_penultimate, 
+                     sim_vec_ratio):
         '''
-	Export files in pickle format
-	'''
-	with open("./data/vec_all.pickle", "wb") as f:
+        Export files in pickle format
+        '''
+        with open("./data/vec_all.pickle", "wb") as f:
             pickle.dump(sim_vec_all, f, protocol=pickle.HIGHEST_PROTOCOL)
 
         with open("./data/vec_first.pickle", "wb") as f:
@@ -176,10 +184,10 @@ class WordleSimulation:
         with open("./data/vec_ratio.pickle", "wb") as f:
             pickle.dump(sim_vec_ratio, f, protocol=pickle.HIGHEST_PROTOCOL)
 
-    def _invalidRes(self):
-	'''
-	Remove all invalid vectors in the 'YMN' vectors
-	'''
+    def invalidRes(self):
+        '''
+        Remove all invalid vectors in the 'YMN' vectors
+        '''
         invalid_results = {}
         for a in self.words:
             invalid_results[a] = set("".join(x) for x in product("YMN", repeat=5))
@@ -193,20 +201,20 @@ class WordleSimulation:
 def main():
     '''
     The main functions creates an object of WordleSimulation and calls the functions in it since WordleSimulation is a standalone code
-    that can be run once and does not need to be executed again. 
+    that can be run once and does not need to be executed again.
     '''
     ray.init()
     res = []
-    num_sims = 10
-    for i in range(len(main.words)):
-        res.append(main._run_simulations.remote(main.words.iloc[i,0], num_sims))
+    wd = WordleSimulation()
+    for i in range(len(wd.words)):
+        res.append(wd.run_simulations.remote(wd, wd.words_ind[i]))
 
     sim_results = ray.get(res)
-    main._getSimRes(sim_results)
+    wd.getSimRes(sim_results)   
     ray.shutdown()
     gc.collect()
 
-    main._invalidRes()
+    wd.invalidRes()
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
