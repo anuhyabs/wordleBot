@@ -18,7 +18,7 @@ class WordleSimulation:
         '''
         Constructor to initialize variables for the class.
         '''
-        self.words = pd.read_csv('./data/answers.csv',header = 0)
+        self.words = pd.read_csv('../data/answers.csv',header = 0)
         self.vec_locs = sorted(["".join(x) for x in product("YMN", repeat=5)])
         self.words_array = np.zeros((5, len(self.words)))
         self.words_ind = self.words.iloc[:,0]
