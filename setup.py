@@ -16,6 +16,6 @@ setup(
     keywords='python, wordle',
     packages=find_packages(),
     python_requires='>=3.6',
-    install_requires=['pandas', 'scipy', 'pickle', 'itertools',
-	'Counter', 'tweepy', 'pytz', 'datetime'
+    install_requires=['pandas', 'scipy', 'pickle', 'Counter', 'tweepy',
+     'pytz', 'datetime'
 ],)
