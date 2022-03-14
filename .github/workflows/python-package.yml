@@ -39,4 +39,4 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-        python wordleBot/test_wordleSimulation.py
+        python test_wordleSimulation.py
