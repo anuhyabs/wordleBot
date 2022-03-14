@@ -7,7 +7,6 @@ Description: Simulate Wordle game for all possible answers
 
 import numpy as np
 import pandas as pd
-import ray
 import gc
 from collections import Counter
 from itertools import product
@@ -19,7 +18,7 @@ class WordleSimulation:
         '''
         Constructor to initialize variables for the class.
         '''
-        self.words = pd.read_csv('./data/possible_words.csv',header = 0)
+        self.words = pd.read_csv('./data/answers.csv',header = 0)
         self.vec_locs = sorted(["".join(x) for x in product("YMN", repeat=5)])
         self.words_array = np.zeros((5, len(self.words)))
         self.words_ind = self.words.iloc[:,0]
@@ -28,7 +27,7 @@ class WordleSimulation:
                 self.words_array[loc, i] = ord(self.words_ind[i][loc])
         self.starting_weights = self.words.iloc[:,1]
 
-    def _evaluate_guess_char(self, answer, guess, pos):
+    def _evaluate_guess_char(answer, guess, pos):
         '''
         Compares the character in guess with characters in answer.
 
@@ -122,7 +121,6 @@ class WordleSimulation:
                             weights *= (self.words_array[loc2,:]!=ord(guess[loc]))
         return game
     
-    @ray.remote
     def run_simulations(self,word):
         '''
         Runs the simulation for a word num_sims times by calling the _simulate_wordle method.
@@ -203,15 +201,15 @@ def main():
     The main functions creates an object of WordleSimulation and calls the functions in it since WordleSimulation is a standalone code
     that can be run once and does not need to be executed again.
     '''
-    ray.init()
+    #ray.init()
     res = []
     wd = WordleSimulation()
     for i in range(len(wd.words)):
-        res.append(wd.run_simulations.remote(wd, wd.words_ind[i]))
+        res.append(wd.run_simulations(wd.words_ind[i]))
 
-    sim_results = ray.get(res)
+    sim_results = res#ray.get(res)
     wd.getSimRes(sim_results)   
-    ray.shutdown()
+    #ray.shutdown()
     gc.collect()
 
     wd.invalidRes()
