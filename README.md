@@ -22,26 +22,29 @@ The inspiration for this project is this excellent [Ben Hammer’s Kaggle projec
 
 ```bash
 wordleBot
-    ├── Documents
-    │   ├── FinalPresentation.pdf
-    │   ├── design_doc.md
-    │   └── functional_specs.md
-    ├── Examples
-    │   └── example.py
-    ├── LICENSE
-    ├── README.md
-    ├── setup.py
-    └── wordleBot
-        ├── __init__.py
-        ├── data
-        │   ├── possible_words.csv
-        │   ├── tweets.csv
-        │   └── unigram_freq.csv
-        ├── dataSetup.py
-        ├── getTweets.py
-        ├── solveWordle.py
-        ├── tests
-        │   ├── test_solveWordle.py
-        │   └── test_wordleSimulation.py
-        └── wordleSimulation.py
+├── Documents
+│   ├── FinalPresentation.pdf
+│   ├── design_doc.md
+│   └── functional_specs.md
+├── Examples
+│   ├── data
+│   │   ├── answers.csv
+│   │   └── unigram_freq.csv
+│   ├── dataSetup.py
+│   └── wordleSimulation.py
+├── LICENSE
+├── README.md
+├── setup.py
+└── wordleBot
+    ├── __init__.py
+    ├── data
+    │   ├── possible_words.csv
+    │   ├── tweets.csv
+    │   └── unigram_freq.csv
+    ├── dataSetup.py
+    ├── getTweets.py
+    ├── solveWordle.py
+    ├── test_wordleSimulation.py
+    ├── twitterKeys.py
+    └── wordleSimulation.py
  ```
