@@ -18,7 +18,7 @@ class WordleSimulation:
         '''
         Constructor to initialize variables for the class.
         '''
-        self.words = pd.read_csv('../data/possible_words.csv',header = 0)
+        self.words = pd.read_csv('../wordleBot/data/possible_words.csv',header = 0)
         self.vec_locs = sorted(["".join(x) for x in product("YMN", repeat=5)])
         self.words_array = np.zeros((5, len(self.words)))
         self.words_ind = self.words.iloc[:,0]
@@ -27,7 +27,7 @@ class WordleSimulation:
                 self.words_array[loc, i] = ord(self.words_ind[i][loc])
         self.starting_weights = self.words.iloc[:,1]
 
-    def _evaluate_guess_char(answer, guess, pos):
+    def _evaluate_guess_char(self, answer, guess, pos):
         '''
         Compares the character in guess with characters in answer.
 
