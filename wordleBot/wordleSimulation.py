@@ -139,7 +139,7 @@ class WordleSimulation:
         first_counts : array
         penultimate_counts : array
         '''
-        num_sims = 10
+        num_sims = 3500
         games = [self._simulate_wordle(word) for i in range(num_sims)]
         all_counts = Counter(res for game in games for res in game if len(game)>=2 and game[-1]=="YYYYY")
         first_counts = Counter(game[0] for game in games if len(game)>=2 and game[-1]=="YYYYY")
