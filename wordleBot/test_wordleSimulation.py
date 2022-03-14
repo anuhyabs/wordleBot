@@ -5,7 +5,7 @@ Created on Tue Mar  1 17:57:45 2022
 Name: test_wordleSimulation
 Description : Tests whether the guess is being evaluated correctly with the answer
 """
-from WordleSimulation import WordleSimulation
+from wordleSimulation import WordleSimulation
 
 obj = WordleSimulation()
 def test_sim():
