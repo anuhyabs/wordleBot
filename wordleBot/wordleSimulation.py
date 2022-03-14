@@ -28,7 +28,7 @@ class WordleSimulation:
                 self.words_array[loc, i] = ord(self.words_ind[i][loc])
         self.starting_weights = self.words.iloc[:,1]
 
-    def _evaluate_guess_char(answer, guess, pos):
+    def _evaluate_guess_char(self, answer, guess, pos):
         '''
         Compares the character in guess with characters in answer.
 
