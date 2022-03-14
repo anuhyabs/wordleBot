@@ -13,8 +13,8 @@ from scipy import spatial
 import re
 
 class SolveWordle:
-	def __init__(self):
-		''' 
+    def __init__(self):
+    	''' 
 		Contructor that declares all the class variables of solveWordle.
 		'''
         	self.v_all = None
