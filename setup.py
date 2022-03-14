@@ -17,5 +17,5 @@ setup(
     packages=find_packages(),
     python_requires='>=3.6',
     install_requires=['pandas', 'scipy', 'Counter', 'tweepy',
-     'pytz', 'datetime', 'ray', 'msgpack'
+     'pytz', 'datetime', 'ray', 'msgpack', 'google'
 ],)
