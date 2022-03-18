@@ -18,6 +18,11 @@ The inspiration for this project is this excellent [Ben Hammer’s Kaggle projec
 2. ```cd wordleBot```
 3. ```python setup.py install```
 
+### Example
+
+An example is provided to demonstrate how this library can be used to run the solveWordle for a classic Wordle game. The following command will run this example:
+```python Examples\solveWordle.py```
+
 ### Package Structure:
 
 ```bash
