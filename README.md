@@ -21,7 +21,22 @@ The inspiration for this project is this excellent [Ben Hammer’s Kaggle projec
 ### Example
 
 An example is provided to demonstrate how this library can be used to run the solveWordle for a classic Wordle game. The following command will run this example:
-```python Examples\solveWordle.py```
+```bash 
+python Examples\solveWordle.py
+```
+
+### User Profile
+- Word Game enthusiasts
+- Developers
+
+### Data sources
+- https://www.kaggle.com/rtatman/english-word-frequency <br>	
+This dataset contains the counts of the 333,333 most commonly-used single words on the English language web, as derived from the Google Web Trillion Word Corpus.
+- Twitter data collected using the Twitter API for a specific Wordle ID.
+
+### Use cases
+1. Word Game enthusiasts setup the package and run the program to solve the wordle in one guess.
+2. Developers who want to build a Wordle Solver using the distribution of tweets for the Wordle ID.
 
 ### Package Structure:
 
