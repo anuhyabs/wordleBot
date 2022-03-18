@@ -51,7 +51,7 @@ The WordleSimulation class is used to run simulations of the wordle game for all
 | WordleSimulation              |
 |------------------------|
 | __init__(self) |
-| \_evaluate_guess_char(answer, guess, pos) |
+| \_evaluate_guess_char(self,answer, guess, pos) |
 | \_evaluate_guess(self,answer, guess) |
 | \_simulate_wordle(self,answer,starting_weights) |
 | \_run_simulations(self,word, num_sims) |
@@ -83,6 +83,12 @@ The SolveWordle class is used to compute the distribution of Wordle results twit
          &emsp; &emsp; &emsp; vec_ratio.pickle <br>
          &emsp; &emsp; &emsp; invalid_results.pickle <br>
 
+### Testing Strategy
+
+Since this project is not a conventional software desigin project, test cases were written for only those classes that had some functional logic present and not for all the classes available.
+
+- The test_wordleSimulation class checks whether the evaluation of the guess and answer is working as expected.
+- The test_solveWordle class checks whether the answer for the day matches the word guessed by the algorithm.
 
 
 
